@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #contentBox {
+            margin: 0 auto;
+            width: 358px;
+        }
+        #contentBox .b-header {
+            height: 34px;
+            width: 358px;
+            background: url("images/sbj.jpg") repeat;
+        }
+        #contentBox .b-header span {
+            line-height: 34px;
+            position: relative;
+            left: 10px;
+            font-size: 12px;
+        }
+        #contentBox .b-header a {
+            margin: 10px 5px 0 0;
+            font-size: 12px;
+            color: #f00;
+            float: right;
+            display: block;
+            text-decoration: underline;
+        }
+        #contentBox .b-list {
+            /*width: 358px;*/
+            /*height: 34px;*/
+            border: 1px solid #dbdbdb;
+        }
+        #contentBox .b-list .b-list-content ul {
+            list-style-type: none;
+        }
+        #contentBox .b-list .b-list-content ul li {
+            margin: 10px;
+            border-bottom: 1px dashed #999;
+            height: 15px;
+            position: relative;
+            left: -25px;
+        }
+        #contentBox .b-list .b-list-content .b-list-content-title {
+            float: left;
+            /*position: relative;*/
+            line-height: 10px;
+            /*left: -20px;*/
+            font-size: 12px;
+        }
+        #contentBox .b-list .b-list-content .b-list-content-title a span {
+            margin-right: 5px;
+        }
+        /*#contentBox .b-list .b-list-content .b-list-content-title a {*/
+            /*padding-left: 15px;*/
+            /*background: url("images/ico.jpg") left center no-repeat;*/
+        /*}*/
+        #contentBox .b-list .b-list-content .b-list-content-time {
+            color: #bdbdbd;
+            font-size: 10px;
+            float: right;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="contentBox">
+    <div class="b-header">
+        <span>公告栏</span>
+        <a href="#" target="_self">
+            <img src="images/more.gif" alt=""/>
+        </a>
+    </div>
+    <div class="b-list">
+        <div class="b-list-content">
+            <ul>
+                <li>
+                    <div class="b-list-content-title">
+                        <a href="#"><span><img src="images/ico.jpg" alt=""/></span>转发：浙江省商务厅什么等等我</a>
+                    </div>
+                    <div class="b-list-content-time">2015-04-07</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
