@@ -119,7 +119,7 @@ var _ = {
     renderPicBox: function (o) {
         o.picScroll({
             size: {'height': '270px', width: '530px'},
-            color: 'rgba(221, 221, 221, 0.4)',
+            color: '#ddd', //rgba(221, 221, 221, 0.4)
             hovercolor: '#C70909',
             time: 2000,
             hasNumber: false
