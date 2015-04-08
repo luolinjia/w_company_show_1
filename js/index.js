@@ -162,7 +162,7 @@ $(function () {
 			'logo': 'images/logo/1.jpg'
 		}]
 	};
-	_.renderBox($('.c-layer5-sponsor'), dataLayer5, '100%', 'sponsor');
+	_.renderBox($('.f-links-sponsor'), dataLayer5, '100%', 'sponsor');
 
 
 });
