@@ -205,7 +205,7 @@ body {
 .b-box .b-list .b-list-content .b-list-content-title a {
     text-decoration: none;
     color: #444;
-    width: 240px;
+    width: 220px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -236,6 +236,73 @@ body {
     float: left;
     margin-right: 10px;
 }
+/********************************module list***********************************/
+.m-box {
+    width: 650px;
+}
+.m-box .m-header {
+    background: url("../images/list_bg.gif") repeat;
+    border: 1px solid #dbdbdb;
+    border-bottom: 0;
+    padding-left: 10px;
+    height: 28px;
+}
+.m-box .m-header span {
+    line-height: 34px;
+    position: relative;
+    left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #b50100;
+}
+.m-box .m-list {
+    /*border: 1px solid #dbdbdb;*/
+    margin: 25px;
+    margin-top: 35px;
+}
+.m-box .m-list .m-list-content ul {
+    /*list-style-type: none;*/
+    /*padding: 0;*/
+    /*margin: 0;*/
+}
+.m-box .m-list .m-list-content ul li {
+    margin: 10px;
+    margin-top: 15px;
+    /*border-bottom: 1px dashed #999;*/
+    height: 25px;
+}
+.m-box .m-list .m-list-content .m-list-content-title {
+    float: left;
+    font-size: 14px;
+}
+.m-box .m-list .m-list-content .m-list-content-title a {
+    text-decoration: none;
+    color: #444;
+    width: 530px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    position: relative;
+    top: -3px;
+}
+.m-box .m-list .m-list-content .m-list-content-title a:hover {
+    text-decoration: underline;
+    color: #ff6600;
+}
+.m-box .m-list .m-list-content .m-list-content-title a span {
+    margin-right: 5px;
+}
+.m-box .m-list .m-list-content .m-list-content-title a span img {
+    border: 0;
+}
+.m-box .m-list .m-list-content .m-list-content-time {
+    color: #bdbdbd;
+    font-size: 10px;
+    float: right;
+    margin: 0 10px;
+}
+
 
 /***********************************footer**********************************/
 #footer {
@@ -270,26 +337,28 @@ body {
 /***********************************content-module**********************************/
 .c-m-content {
     height: 600px;
-    border: 1px solid #999;
+    margin-top: 5px;
+    /*border: 1px solid #999;*/
 }
 .c-m-content .c-m-content-left {
     float: left;
     width: 250px;
     height: 100%;
-    border: 1px solid green;
+    /*border: 1px solid green;*/
 }
 .c-m-content .c-m-content-left .c-m-left-up {
     height: 300px;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     margin: 5px;
 }
 .c-m-content .c-m-content-left .c-m-left-down {
     height: 278px;
-    border: 1px solid darkorchid;   margin: 5px;
+    /*border: 1px solid darkorchid;   */
+    margin: 5px;
 }
 .c-m-content .c-m-content-right {
     float: left;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     height: 98%;
     margin: 5px;
     width: 630px;
