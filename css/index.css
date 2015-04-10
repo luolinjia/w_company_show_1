@@ -278,7 +278,7 @@ body {
 .m-box .m-list .m-list-content .m-list-content-title a {
     text-decoration: none;
     color: #444;
-    width: 530px;
+    width: 500px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
