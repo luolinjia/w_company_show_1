@@ -1,6 +1,8 @@
 /**
  * Created by luolinj on 4/7/2015.
  */
+var newsList;
+
 $(function () {
     var dataLayer1 = {
         'boxH': '协会活动',
@@ -210,7 +212,7 @@ $(function () {
     _.renderBox($('.c-m-left-down'), dataDirect, '240px', 'direct');
 
     // module news list
-    var newsList = {
+    var _newsList = {
         'moduleH': '其它信息',
         'list': [{
             'link': 'http://baidu.com',
@@ -220,7 +222,63 @@ $(function () {
             'link': 'http://baidu.com',
             'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
             'date': '2015-04-07'
-        },{
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
+			'link': 'http://baidu.com',
+			'title': '转发：浙江省商务厅什么等等我转发：浙江省商务厅什么等等我',
+			'date': '2015-04-07'
+		},{
             'link': 'http://baidu.com',
             'title': '电商先行，法律随后 ——记杭州市电子商务a厅什么等',
             'date': '2015-04-06'
@@ -254,6 +312,7 @@ $(function () {
             'date': '2015-04-06'
         }]
     };
+	newsList = _newsList;
     _.renderModulePostList($('.c-m-content-right'), newsList);
 });
 
@@ -327,15 +386,43 @@ var _ = {
         return list;
     },
     renderModulePostList: function (self, data) {
-        var list = [], i = 0, size = data['list'].length;
-        list.push('<ul>');
-        for (; i < size; i++) {
-            var item = data['list'][i];
-            list.push('<li><div class="m-list-content-title"><a href="' + item['link'] + '" target="_self"><span><img src="images/list_li.gif" alt=""/></span>'  + item['title'] + '</a></div><div class="m-list-content-time">' + item['date'] + '</div></li>');
-        }
-        list.push('</ul>');
+//        var list = [], i = 0, size = data['list'].length;
+//        list.push('<ul>');
+//        for (; i < size; i++) {
+//            var item = data['list'][i];
+//            list.push('<li><div class="m-list-content-title"><a href="' + item['link'] + '" target="_self"><span><img src="images/list_li.gif" alt=""/></span>'  + item['title'] + '</a></div><div class="m-list-content-time">' + item['date'] + '</div></li>');
+//        }
+//        list.push('</ul>');
 
-        var dom = '<div class="m-box"><div class="m-header"><img src="images/list_ico.gif" /><span>' + data['moduleH'] + '</span></div><div class="m-list"><div class="m-list-content">' + list.join('') + '</div></div></div>';
+		var dom = '<div class="m-box"><div class="m-header"><img src="images/list_ico.gif" /><span>' + data['moduleH'] + '</span></div><div class="m-list"><div class="m-list-content"></div></div><div id="pagination"></div></div>';
         self.append(dom);
-    }
+		_.renderPagination();
+    },
+	renderPagination: function () {
+		$('#pagination').pagination(newsList['list'].length, {
+			callback: _.pageselectCallback,
+			prev_text: '前一页',
+			next_text: '后一页'
+		});
+	},
+	pageselectCallback: function (page_index, jq) {
+		// Get number of elements per pagionation page from form
+		var items_per_page = 12,
+			max_elem = Math.min((page_index + 1) * items_per_page, newsList['list'].length),
+			list = [];
+		list.push('<ul>');
+		// Iterate through a selection of the content and build an HTML string
+		for (var i = page_index * items_per_page; i < max_elem; i++) {
+			var item = newsList['list'][i];
+			list.push('<li><div class="m-list-content-title"><a href="' + item['link'] + '" target="_self"><span><img src="images/list_li.gif" alt=""/></span>'  + item['title'] + '</a></div><div class="m-list-content-time">' + item['date'] + '</div></li>');
+
+		}
+		list.push('</ul>');
+
+		// Replace old content with new content
+		$('.m-list-content').empty().append(list.join(''));
+
+		// Prevent click event propagation
+		return false;
+	}
 };
