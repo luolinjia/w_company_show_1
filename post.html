@@ -31,12 +31,20 @@
     <div class="m-module">
         <ul>
             <li class="m-selected"><a href="#">网站首页</a></li>
-            <li><a href="#">关于协会</a></li>
+            <li>
+                <a href="#">关于协会</a>
+                <div class="more">
+                    <div><a href="#">协会大事记</a></div>
+                    <div><a href="#">协会章程</a></div>
+                    <div><a href="#">发展会员邀请函</a></div>
+                    <div><a href="#">入会流程</a></div>
+                </div>
+            </li>
             <li><a href="#">业内动态</a></li>
             <li><a href="#">协会活动</a></li>
             <li><a href="#">协会会刊</a></li>
             <li><a href="#">其它信息</a></li>
-            <li><a href="#">人才服务</a></li>
+            <!--<li><a href="#">人才服务</a></li>-->
             <li><a href="#">服务我们</a></li>
         </ul>
     </div>
@@ -86,6 +94,9 @@
         var dom = '<div class="m-box"><div class="m-header"><img src="images/list_ico.gif" /><span>' + postDetailData['moduleH'] + '</span></div><div class="m-detail-post"><div class="m-detail-post-title">'  + postDetailData['title'] + '</div><div class="m-detail-post-date">' + postDetailData['date'] + '</div><div class="m-detail-post-content">' + postDetailData['content'] + '</div><div class="m-detail-post-link"><div class="previous">上一条：<a href="' + postDetailData['previousPost']['link'] + '">' + postDetailData['previousPost']['title'] + '</a></div><div class="next">下一条：<a href="' + postDetailData['nextPost']['link'] + '">' + postDetailData['nextPost']['title'] + '</a></div></div></div></div>';
 
         $('.c-m-content-right').empty().append(dom);
+
+        // set the detail module
+
 
     });
 

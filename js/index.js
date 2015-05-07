@@ -5,7 +5,9 @@ var newsList;
 
 $(function () {
 
-    _.bindAboutEvent($('#menu'));
+	var menu = $('#menu');
+    _.bindAboutEvent(menu);
+	_.switchModule($('li', menu));
 
     var dataLayer1 = {
         'boxH': '协会活动',
@@ -73,10 +75,10 @@ $(function () {
     var dataLayer21 = {
         'boxH': '公告栏',
         'isMore': false,
-        'content': '杭州市电子商务协会是由杭州市经济信息中心、阿里巴巴（中国）网络技术公司、杭州科希盟科技有限公司、杭州市邮政投递服务公司、浙江华立集团、杭州祐康电子商务网络有限公司六家单位发起，由杭州市从事电子商务研究开发、应用等相关领域的企事业单位和个人自愿结合组成的地方性、联合性、非营利性社团组织，经杭州市民政局批准，2002年7月正式成'
+        'content': '南岸区电子商务协会是由重庆市南岸区商圈管委会、重庆国际电子商务产业园、重庆易网集团、新锐数字营销机构、淘会场、种钱网等由重庆市南岸区从事电子商务研究开发、应用等相关领域的企事业单位自愿结合组成的地方性、联合性、非营利性社团组织，经重庆市民政局批准，2015年1月正式成立，其主管部门是重庆市南岸区商圈管委会。协会主要是从事信息化和电子商务服务、研究、培训、购买政府服务等相关工作。在重庆市南岸区商圈管委会指导下，为进一步促进电子商务发展，推进行业内电子商务经营、服务水平的提高，充分利用全社会电子商务行业的资源，通过开展丰富的咨询、培训、交流、沙龙等活动，进一步团结会员、服务会员、服务行业、服务政府、服务社会。'
     };
     _.renderBox($('.c-layer2-left'), dataLayer2, '358px', 'post');
-    _.renderBox($('.c-layer2-center'), dataLayer21, '358px', 'about');
+    _.renderBox($('.c-layer2-center'), dataLayer21, '530px', 'about');
 
 	var dataLayer4 = {
 		'boxH': '公告栏',
@@ -204,7 +206,7 @@ var _ = {
 		return list;
     },
     renderAbout: function (data) {
-		return '<div class="b-about"><img src="images/biaozhi.jpg" alt=""/>' + data['content'] + '</div>';
+		return '<div class="b-about"><img src="images/logo.png" alt=""/>' + data['content'] + '</div>';
     },
     renderPicBox: function (o) {
         o.picScroll({
@@ -234,6 +236,15 @@ var _ = {
 		}
 		list.push('</ul>');
 		return list;
-    }
+    },
+	switchModule: function (o) {
+		o.click(function () {
+			var thiz = $(this);
+			if ($('.m-selected').length === 1) {
+				o.removeClass('m-selected');
+			}
+			thiz.toggleClass('m-selected');
+		});
+	}
 
 };

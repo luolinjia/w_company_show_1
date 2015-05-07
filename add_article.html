@@ -206,7 +206,9 @@
                     return false;
                 }
                 // 跳转到新页面，预览页面
-                req.previewPost({data: postObj});
+                req.previewPost({data: postObj}, function (data) {
+
+                });
             });
         },
         getCurrentDate: function () {

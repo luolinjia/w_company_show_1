@@ -5,6 +5,8 @@ var newsList;
 
 $(function () {
 
+	_.bindAboutEvent($('#menu'));
+
 	var dataLayer5 = {
 		'boxH': '友情链接',
 		'boxLink': 'http://luolinjia.com',
@@ -193,10 +195,36 @@ $(function () {
         }]
     };
 	newsList = _newsList;
-    _.renderModulePostList($('.c-m-content-right'), newsList);
+	var pageOptions = {
+		'totalNo': 22,
+		'perNo': 15,
+		'cPage': 0
+	};
+    _.renderModulePostList($('.c-m-content-right'), newsList, pageOptions);
 });
 
+var req = {
+	getDetailPage: function (options, callback) {
+		$.ajax($.extend({
+			type: 'POST',
+			url: 'json/list.json',  // /getDetailPage
+			dataType: 'JSON'
+		}, options, true)).done(function(data){
+			if (data && $.isFunction(callback)) {
+				callback(data);
+			}
+		});
+	}
+};
+
 var _ = {
+	bindAboutEvent: function (self) {
+		$('.more', self).parent().mouseover(function () {
+			$('.more', $(this)).show();
+		}).mouseleave(function () {
+			$('.more', $(this)).hide();
+		});
+	},
     renderBox: function (self, data, width, flag) {
 		var innerDom = '';
 		if ('sponsor' === flag) {
@@ -239,7 +267,7 @@ var _ = {
         }
         return list;
     },
-    renderModulePostList: function (self, data) {
+    renderModulePostList: function (self, data, options) {
 //        var list = [], i = 0, size = data['list'].length;
 //        list.push('<ul>');
 //        for (; i < size; i++) {
@@ -250,33 +278,60 @@ var _ = {
 
 		var dom = '<div class="m-box"><div class="m-header"><img src="images/list_ico.gif" /><span>' + data['moduleH'] + '</span></div><div class="m-list"><div class="m-list-content"></div></div><div id="pagination"></div></div>';
         self.append(dom);
-		_.renderPagination();
+		_.renderPagination(options['totalNo'], options['perNo'], options['cPage']);
     },
-	renderPagination: function () {
-		$('#pagination').pagination(newsList['list'].length, {
+	renderPagination: function (totalNo, perNo, cPage) {
+//		$('#pagination').pagination(newsList['list'].length, {
+//			callback: _.pageselectCallback,
+//			prev_text: '前一页',
+//			next_text: '后一页'
+//		});
+		_.pageselectCallback(0);
+		// init the pagination
+		$("#pagination").pagination(totalNo, {
+			items_per_page: perNo, // 这里为每页显示的条数
+			num_display_entries: 5,
+			current_page: cPage,
 			callback: _.pageselectCallback,
-			prev_text: '前一页',
-			next_text: '后一页'
+			prev_text: "前一页",
+			next_text: "后一页"
 		});
 	},
 	pageselectCallback: function (page_index, jq) {
-		// Get number of elements per pagionation page from form
-		var items_per_page = 12,
-			max_elem = Math.min((page_index + 1) * items_per_page, newsList['list'].length),
-			list = [];
-		list.push('<ul>');
-		// Iterate through a selection of the content and build an HTML string
-		for (var i = page_index * items_per_page; i < max_elem; i++) {
-			var item = newsList['list'][i];
-			list.push('<li><div class="m-list-content-title"><a href="' + item['link'] + '" target="_self"><span><img src="images/list_li.gif" alt=""/></span>'  + item['title'] + '</a></div><div class="m-list-content-time">' + item['date'] + '</div></li>');
 
-		}
-		list.push('</ul>');
+		req.getDetailPage({data: {'page': parseInt(page_index)}}, function (data) {
+			var list = [], i = 0, size = data.length;
+			list.push('<ul>');
+			for (; i < size; i++) {
+				var item = data[i];
+				list.push('<li><div class="m-list-content-title"><a href="' + item['link'] + '" target="_self"><span><img src="images/list_li.gif" alt=""/></span>'  + item['title'] + '</a></div><div class="m-list-content-time">' + item['date'] + '</div></li>');
+			}
+			list.push('</ul>');
+			// Replace old content with new content
+			$('.m-list-content').empty().append(list.join(''));
 
-		// Replace old content with new content
-		$('.m-list-content').empty().append(list.join(''));
+			// Prevent click event propagation
+			return false;
+		});
 
-		// Prevent click event propagation
-		return false;
+
+//		// Get number of elements per pagionation page from form
+//		var items_per_page = 12,
+//			max_elem = Math.min((page_index + 1) * items_per_page, newsList['list'].length),
+//			list = [];
+//		list.push('<ul>');
+//		// Iterate through a selection of the content and build an HTML string
+//		for (var i = page_index * items_per_page; i < max_elem; i++) {
+//			var item = newsList['list'][i];
+//			list.push('<li><div class="m-list-content-title"><a href="' + item['link'] + '" target="_self"><span><img src="images/list_li.gif" alt=""/></span>'  + item['title'] + '</a></div><div class="m-list-content-time">' + item['date'] + '</div></li>');
+//
+//		}
+//		list.push('</ul>');
+//
+//		// Replace old content with new content
+//		$('.m-list-content').empty().append(list.join(''));
+//
+//		// Prevent click event propagation
+//		return false;
 	}
 };
