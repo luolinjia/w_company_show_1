@@ -5,7 +5,8 @@ var newsList;
 
 $(function () {
 
-	_.bindAboutEvent($('#menu'));
+	var menu = $('#menu');
+	_.bindAboutEvent(menu);
 
 	var dataLayer5 = {
 		'boxH': '友情链接',
@@ -201,6 +202,7 @@ $(function () {
 		'cPage': 0
 	};
     _.renderModulePostList($('.c-m-content-right'), newsList, pageOptions);
+	_.setModuleH($('li', menu), newsList['moduleH']);
 });
 
 var req = {
@@ -218,6 +220,17 @@ var req = {
 };
 
 var _ = {
+	setModuleH: function (o, m) {
+		if ($('.m-selected').length === 1) {
+			o.removeClass('m-selected');
+		}
+		o.each(function(){
+			var thiz = $(this);
+			if (m === thiz.text()) {
+				thiz.addClass('m-selected');
+			}
+		});
+	},
 	bindAboutEvent: function (self) {
 		$('.more', self).parent().mouseover(function () {
 			$('.more', $(this)).show();
@@ -297,9 +310,9 @@ var _ = {
 			next_text: "后一页"
 		});
 	},
-	pageselectCallback: function (page_index, jq) {
+	pageselectCallback: function (page_index) {
 
-		req.getDetailPage({data: {'page': parseInt(page_index)}}, function (data) {
+		req.getDetailPage({data: {'page': parseInt(page_index), 'moduleH': newsList['moduleH']}}, function (data) {
 			var list = [], i = 0, size = data.length;
 			list.push('<ul>');
 			for (; i < size; i++) {
