@@ -5,8 +5,11 @@ var newsList;
 
 $(function () {
 
+	_.bindSearch();
+
 	var menu = $('#menu');
 	_.bindAboutEvent(menu);
+	_.switchModule($('li', menu));
 
 	var dataLayer5 = {
 		'boxH': '友情链接',
@@ -326,25 +329,32 @@ var _ = {
 			// Prevent click event propagation
 			return false;
 		});
+	},
+	switchModule: function (o) {
+		o.click(function () {
+			var thiz = $(this);
+			if ($('.m-selected').length === 1) {
+				o.removeClass('m-selected');
+			}
+			thiz.toggleClass('m-selected');
+		});
+	},
+	bindSearch: function () {
+		$('#search').on('click', function () {
+			console.log('search function!');
+			var searchObj = $('#searchText'),
+				text = searchObj.val(),
+				patrn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
 
-
-//		// Get number of elements per pagionation page from form
-//		var items_per_page = 12,
-//			max_elem = Math.min((page_index + 1) * items_per_page, newsList['list'].length),
-//			list = [];
-//		list.push('<ul>');
-//		// Iterate through a selection of the content and build an HTML string
-//		for (var i = page_index * items_per_page; i < max_elem; i++) {
-//			var item = newsList['list'][i];
-//			list.push('<li><div class="m-list-content-title"><a href="' + item['link'] + '" target="_self"><span><img src="images/list_li.gif" alt=""/></span>'  + item['title'] + '</a></div><div class="m-list-content-time">' + item['date'] + '</div></li>');
-//
-//		}
-//		list.push('</ul>');
-//
-//		// Replace old content with new content
-//		$('.m-list-content').empty().append(list.join(''));
-//
-//		// Prevent click event propagation
-//		return false;
+			if (patrn.test(text)) {
+				alert("提示信息：您输入的搜索关键字含有非法字符！");
+				searchObj.focus();
+				return false;
+			}
+			console.log('text:' + text);
+			req.getSearchResult({'data': {'searchText' : text}}, function (data) {
+				// 你可以这里重定向，或者不要这个callback，直接你后台重定向
+			});
+		});
 	}
 };
