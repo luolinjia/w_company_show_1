@@ -5,6 +5,8 @@ var newsList;
 
 $(function () {
 
+	_.bindSearch();
+
 	var menu = $('#menu');
     _.bindAboutEvent(menu);
 	_.switchModule($('li', menu));
@@ -173,6 +175,20 @@ $(function () {
 
 });
 
+var req = {
+	getSearchResult: function (options, callback) {
+		$.ajax($.extend({
+			type: 'POST',
+			url: 'json/list.json',  // /getDetailPage
+			dataType: 'JSON'
+		}, options, true)).done(function(data){
+			if (data && $.isFunction(callback)) {
+				callback(data);
+			}
+		});
+	}
+};
+
 var _ = {
     bindAboutEvent: function (self) {
         $('.more', self).parent().mouseover(function () {
@@ -244,6 +260,24 @@ var _ = {
 				o.removeClass('m-selected');
 			}
 			thiz.toggleClass('m-selected');
+		});
+	},
+	bindSearch: function () {
+		$('#search').on('click', function () {
+			console.log('search function!');
+			var searchObj = $('#searchText'),
+				text = searchObj.val(),
+				patrn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
+
+			if (patrn.test(text)) {
+				alert("提示信息：您输入的搜索关键字含有非法字符！");
+				searchObj.focus();
+				return false;
+			}
+			console.log('text:' + text);
+			req.getSearchResult({'data': {'searchText' : text}}, function (data) {
+				// 你可以这里重定向，或者不要这个callback，直接你后台重定向
+			});
 		});
 	}
 
